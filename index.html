@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Portfolio Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; }
+        header { background-color: #343a40; color: white; padding: 20px; text-align: center; }
+        table { width: 80%; margin: 20px auto; border-collapse: collapse; }
+        table, th, td { border: 1px solid #ddd; }
+        th, td { padding: 10px; text-align: center; }
+        .btn { padding: 5px 10px; margin: 5px; cursor: pointer; background-color: #007bff; color: white; border: none; }
+        .btn:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Stock Portfolio Tracker</h1>
+</header>
+
+<div style="text-align: center; margin-bottom: 20px;">
+    <a href="/add"><button class="btn">Add Stock</button></a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Stock Symbol</th>
+            <th>Quantity</th>
+            <th>Purchase Price</th>
+            <th>Current Price</th>
+            <th>Current Value</th>
+            <th>Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stock in stocks %}
+        <tr>
+            <td>{{ stock[1] }}</td>
+            <td>{{ stock[2] }}</td>
+            <td>${{ stock[3] }}</td>
+            <td>${{ get_stock_data(stock[1]) }}</td>
+            <td>${{ get_stock_data(stock[1]) * stock[2] }}</td>
+            <td><a href="/remove/{{ stock[0] }}"><button class="btn">Remove</button></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Total Portfolio Value: ${{ portfolio_value }}</h3>
+
+</body>
+</html>
